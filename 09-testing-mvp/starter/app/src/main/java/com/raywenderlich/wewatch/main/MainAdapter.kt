@@ -37,6 +37,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 import com.raywenderlich.wewatch.R
@@ -59,7 +60,9 @@ class MainAdapter(internal var movieList: List<Movie>, internal var context: Con
     holder.titleTextView.text = movieList[position].title
     holder.releaseDateTextView.text = movieList[position].releaseDate
     if (movieList[position].posterPath.equals("")) {
-      holder.movieImageView.setImageDrawable(context.getDrawable(R.drawable.ic_local_movies_gray))
+      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        holder.movieImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_local_movies_gray))
+      }
     } else {
       Picasso.get().load(RetrofitClient.TMDB_IMAGEURL + movieList[position].posterPath).into(holder.movieImageView)
     }
