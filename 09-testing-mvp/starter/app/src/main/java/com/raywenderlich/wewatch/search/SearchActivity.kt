@@ -63,7 +63,7 @@ class SearchActivity : AppCompatActivity(), SearchContract.ViewInterface {
     progressBar = findViewById(R.id.progress_bar)
 
     val intent = intent
-    query = intent.getStringExtra(SEARCH_QUERY)
+    query = intent.getStringExtra(SEARCH_QUERY).toString()
 
     setupViews()
     setupPresenter()
